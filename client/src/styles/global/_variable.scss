@@ -1,0 +1,33 @@
+// Color
+$black: #111111;
+$red: #de2c26;
+$blue: #01aaef;
+$gray: #999999;
+$light-gray: #f4f4f4;
+$pale-gray: #f1f1f1;
+
+// Body
+$body-bg-color: white;
+$body-color: #333333;
+$body-font-size: 16px;
+
+// Border
+$border-color: #dddddd;
+$border: 1px solid $border-color;
+
+// Button
+$button-bg-color: $blue;
+$button-disabled-bg-color: #d1d1d1;
+
+// scroll
+$scroll-bg: #676567;
+$scroll-track: #d8d6d8;
+$scroll-bg-overlay: #676567;
+
+// Utilities
+$spacing: 15px;
+$spacing-sm: 6px;
+
+//forms
+$form-control-text-brdr--error: #ffb8af;
+$rating-bg--error: #ffd8d3;

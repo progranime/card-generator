@@ -1,0 +1,137 @@
+.card {
+    background-color: #fff;
+    width: 336px;
+    height: 192px;
+    font-size: 10px;
+    position: relative;
+    box-shadow: 1px 1px 3px #ccc;
+
+    &__wrapper {
+        display: flex;
+        flex-flow: row;
+        flex-wrap: wrap;
+
+        .card {
+            width: calc(100%);
+            margin: 2px;
+
+            @include media-breakpoint-up(sm) {
+                width: calc(100% / 2 - 8px);
+            }
+
+            @include media-breakpoint-up(md) {
+                width: calc(100% / 3 - 6px);
+            }
+
+            @include media-breakpoint-up(lg) {
+                width: calc(100% / 4 - 8px);
+            }
+        }
+    }
+
+    &__container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__controls {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        .control {
+            cursor: pointer;
+            margin: 2px 4px;
+            color: #000;
+        }
+    }
+
+    &__image-holder {
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        padding: 0px 50px 0px 20px;
+
+        .default-pic {
+            width: 80px;
+            height: 100px;
+            border-bottom-left-radius: 12%;
+            border-bottom-right-radius: 12%;
+        }
+
+        .title,
+        .subtitle {
+            margin: 0;
+        }
+
+        .title {
+            margin: 3px 0px;
+        }
+
+        .subtitle {
+            font-size: 8px;
+        }
+    }
+    &__details {
+        .logo {
+            margin: 30px 0px 20px;
+        }
+
+        .list {
+            li {
+                margin-bottom: 5px;
+            }
+
+            .icon {
+                margin-right: 10px;
+                font-size: 8px;
+            }
+        }
+    }
+    &__brands {
+        position: absolute;
+        bottom: 20px;
+        margin-left: 20px;
+
+        li {
+            &:not(:first-child) {
+                margin-left: 12px;
+            }
+        }
+
+        img {
+            max-width: 30px;
+            max-height: 10px;
+        }
+    }
+
+    &--rear {
+        .card__container {
+            margin: 30px 25px;
+        }
+
+        .card__details {
+            width: 100%;
+            margin-bottom: 45px;
+            .title {
+                color: red;
+                margin: 0;
+                font-size: 12px;
+                text-align: center;
+            }
+        }
+
+        .card__brands {
+            position: relative;
+            bottom: 0;
+            margin-left: 0;
+
+            li {
+                margin: 0px 20px 0px 0px;
+                &:not(:first-child) {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}
