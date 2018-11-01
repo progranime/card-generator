@@ -25,7 +25,7 @@ export const getCard = payload => dispatch => {
 export const createCard = payload => dispatch => {
     const axiosOptions = {
         method: 'post',
-        url: '/api/card/store',
+        url: '/api/card/',
         data: payload
     }
 

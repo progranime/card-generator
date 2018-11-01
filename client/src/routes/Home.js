@@ -2,30 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { BusinessCard, FloatAction, Spinner } from '../components/Shared'
+import { BusinessCard, FloatAction } from '../components/Shared'
 import { getCard } from '../actions/cardActions'
 
 class Home extends Component {
-    constructor() {
-        super()
-        this.state = {
-            loading: false
-        }
-    }
-
     componentDidMount() {
-        this.setState({
-            loading: true
-        })
         // get the list of the cards
         this.props.getCard()
-    }
-
-    componentWillReceiveProps(nextProps) {
-        const { loading } = nextProps
-        this.setState({
-            loading
-        })
     }
 
     render() {
@@ -50,10 +33,7 @@ class Home extends Component {
         })
         return (
             <div className="main-container">
-                <Spinner loading={this.state.loading} />
-
                 <div className="card__wrapper">{cards}</div>
-
                 <FloatAction />
             </div>
         )

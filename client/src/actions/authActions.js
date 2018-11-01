@@ -1,12 +1,26 @@
-import axios from 'axios'
-import _ from 'lodash'
+// import axios from 'axios'
+// import _ from 'lodash'
 
 import config from '../config/keys'
 import { saveState } from '../store/localStorage'
 
 // login user
 export const login = payload => dispatch => {
-    const axiosOptions = {
+    let userData = {
+        uniqueId: 1,
+        id: 123,
+        name: 'jeremy.espinosa',
+        jobTitle: 'Web Specialist',
+        location: 'Pasig'
+    }
+
+    // add user data to localStorage
+    saveState(config.sessionName, userData)
+
+    // redirect the user to home page
+    window.location.href = '/'
+
+    /* const axiosOptions = {
         method: 'post',
         url: 'http://10.124.8.92:8080/dbusinesscard/rest/user/card',
         data: { name: payload.email, pwd: payload.password },
@@ -47,7 +61,7 @@ export const login = payload => dispatch => {
                 })
             }
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err)) */
 }
 
 // Logout user

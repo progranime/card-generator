@@ -28,7 +28,6 @@ const Form = ({
                     className="form-control"
                     onChange={handleChangeImage}
                     defaultValue={picture}
-                    required
                 />
             </div>
             <div className="form-group">
@@ -42,7 +41,6 @@ const Form = ({
                         method: ''
                     })}
                     defaultValue={name}
-                    required
                 />
             </div>
             <div className="form-group">
@@ -56,7 +54,6 @@ const Form = ({
                         method: ''
                     })}
                     defaultValue={position}
-                    required
                 />
             </div>
             <div className="form-group">
@@ -70,7 +67,6 @@ const Form = ({
                         method: ''
                     })}
                     defaultValue={location}
-                    required
                 />
             </div>
             <div className="form-group">
@@ -106,7 +102,6 @@ const Form = ({
                         method: ''
                     })}
                     defaultValue={email}
-                    required
                 />
             </div>
             <div className="form-group">
