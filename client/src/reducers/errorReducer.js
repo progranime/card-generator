@@ -1,7 +1,8 @@
-import { GET_LOGIN_ERROR } from '../actions/types'
+import { GET_LOGIN_ERROR, GET_ERROR } from '../actions/types'
 
 const initialState = {
-    login: '',
+    login: {},
+    card: {},
     loading: false
 }
 
@@ -11,6 +12,11 @@ export default function(state = initialState, { type, payload }) {
             return {
                 ...state,
                 login: payload.login
+            }
+        case GET_ERROR:
+            return {
+                ...state,
+                card: payload.errors
             }
         default:
             return state

@@ -1,5 +1,6 @@
 // GET
 export const GET_LOGIN_ERROR = 'GET_LOGIN_ERROR'
+export const GET_ERROR = 'GET_ERROR'
 export const GET_PRODUCT_DIVISION = 'GET_PRODUCT_DIVISION'
 export const GET_BRAND_LIST = 'GET_BRAND_LIST'
 export const GET_CARD = 'GET_CARD'

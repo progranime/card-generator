@@ -4,6 +4,9 @@ const router = express.Router()
 // load models
 const card = require('../../models/card')
 
+// load validation
+const cardForm = require('../../scripts/validation/cardForm')
+
 // @router GET api/card
 // @desc   Get all card
 // @access Public
@@ -21,14 +24,19 @@ router.get('/:id', async (req, res) => {
     res.json(results)
 })
 
-// @router POST api/card/store
+// @router POST api/card/
 // @desc   Create new card
 // @access Public
 // --- Please add passport authentication
-router.post('/store', async (req, res) => {
+router.post('/', async (req, res) => {
     const request = req.body
-    const result = await card.store(request)
-    res.json(result)
+    const errors = cardForm.validation(request)
+
+    if (errors) return res.json(errors)
+
+    // const result = await card.store(request)
+    // res.json(result)
+    return res.json(request)
 })
 
 // @router PUT api/card/:id/destroy

@@ -1,4 +1,5 @@
 import React from 'react'
+import classnames from 'classnames'
 
 const Form = ({
     handleChange,
@@ -15,7 +16,8 @@ const Form = ({
     skype,
     brandLists,
     picture,
-    formType
+    formType,
+    errors
 }) => {
     return (
         <form className="form" onSubmit={handleSubmit}>
@@ -43,6 +45,14 @@ const Form = ({
                     defaultValue={name}
                 />
             </div>
+            <div
+                className={classnames('invalid-feedback', {
+                    'd-block': errors.name
+                })}
+            >
+                <p>{errors.name}</p>
+            </div>
+
             <div className="form-group">
                 <label htmlFor="name">Position</label>
                 <input
@@ -56,6 +66,13 @@ const Form = ({
                     defaultValue={position}
                 />
             </div>
+            <div
+                className={classnames('invalid-feedback', {
+                    'd-block': errors.position
+                })}
+            >
+                <p>{errors.position}</p>
+            </div>
             <div className="form-group">
                 <label htmlFor="location">Location</label>
                 <input
@@ -68,6 +85,13 @@ const Form = ({
                     })}
                     defaultValue={location}
                 />
+            </div>
+            <div
+                className={classnames('invalid-feedback', {
+                    'd-block': errors.location
+                })}
+            >
+                <p>{errors.location}</p>
             </div>
             <div className="form-group">
                 <label htmlFor="productDivision">Product Division</label>
@@ -94,7 +118,7 @@ const Form = ({
             <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <input
-                    type="email"
+                    type="text"
                     name="email"
                     id="email"
                     className="form-control"
@@ -103,6 +127,13 @@ const Form = ({
                     })}
                     defaultValue={email}
                 />
+            </div>
+            <div
+                className={classnames('invalid-feedback', {
+                    'd-block': errors.email
+                })}
+            >
+                <p>{errors.email}</p>
             </div>
             <div className="form-group">
                 <label htmlFor="cellphone">Cellphone</label>

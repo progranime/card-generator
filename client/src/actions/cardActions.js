@@ -1,4 +1,5 @@
 import axios from 'axios'
+import _ from 'lodash'
 
 export const getCard = payload => dispatch => {
     let cardId = ''
@@ -25,14 +26,23 @@ export const getCard = payload => dispatch => {
 export const createCard = payload => dispatch => {
     const axiosOptions = {
         method: 'post',
-        url: '/api/card/',
+        url: '/api/card',
         data: payload
     }
 
     axios(axiosOptions).then(res => {
-        dispatch({
-            type: 'CREATE_CARD',
-            payload: {}
-        })
+        if (!_.isEmpty(res.data.errors)) {
+            dispatch({
+                type: 'GET_ERROR',
+                payload: {
+                    errors: res.data.errors
+                }
+            })
+        } else {
+            dispatch({
+                type: 'CREATE_CARD',
+                payload: {}
+            })
+        }
     })
 }
