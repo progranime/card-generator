@@ -1,5 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
+import _ from 'lodash'
 
 const Form = ({
     handleChange,
@@ -52,7 +53,6 @@ const Form = ({
             >
                 <p>{errors.name}</p>
             </div>
-
             <div className="form-group">
                 <label htmlFor="name">Position</label>
                 <input
@@ -130,7 +130,7 @@ const Form = ({
             </div>
             <div
                 className={classnames('invalid-feedback', {
-                    'd-block': errors.email
+                    'd-block': !_.isEmpty(errors.email)
                 })}
             >
                 <p>{errors.email}</p>
@@ -164,7 +164,7 @@ const Form = ({
             <div className="form-group">
                 <label htmlFor="skype">Skype</label>
                 <input
-                    type="email"
+                    type="text"
                     name="skype"
                     id="skype"
                     className="form-control"

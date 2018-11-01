@@ -62,7 +62,7 @@ module.exports = {
         let INSERT_CARD = `INSERT INTO card SET ? `
         let INSERT_CONTACT = `INSERT INTO contact SET ?`
 
-        return new Promise(resolve => {
+        /* return new Promise(resolve => {
             db.query(INSERT_CARD, cardData, (err, result) => {
                 if (err) console.log(err)
                 // get the id of the inserted card
@@ -76,7 +76,7 @@ module.exports = {
                     resolve(result)
                 })
             })
-        })
+        }) */
     },
     update: function() {},
     destroy: function(id) {
@@ -88,5 +88,6 @@ module.exports = {
                 resolve(result)
             })
         })
-    }
+    },
+    uploadImage: function() {}
 }

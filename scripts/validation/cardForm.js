@@ -16,6 +16,7 @@ module.exports = {
         if (!emailRegex.test(email)) errors.email = 'Email is not valid'
         if (_.isEmpty(email)) errors.email = 'Email field is required'
 
+        console.log({ errors })
         return { errors }
     }
 }

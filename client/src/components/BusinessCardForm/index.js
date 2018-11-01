@@ -16,6 +16,7 @@ class Index extends Component {
         super()
         this.state = {
             picture: '',
+            pictureImageData: '',
             name: '',
             position: '',
             location: '',
@@ -74,10 +75,13 @@ class Index extends Component {
     }
 
     handleChangeImage(e) {
-        if (e.target.files && e.target.files[0]) {
+        if (e.target.files[0]) {
+            this.setState({
+                picture: e.target.files[0]
+            })
             let reader = new FileReader()
             reader.onload = e => {
-                this.setState({ picture: e.target.result })
+                this.setState({ pictureImageData: e.target.result })
             }
             reader.readAsDataURL(e.target.files[0])
         }

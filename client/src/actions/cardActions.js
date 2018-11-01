@@ -27,22 +27,23 @@ export const createCard = payload => dispatch => {
     const axiosOptions = {
         method: 'post',
         url: '/api/card',
-        data: payload
+        data: payload,
+        headers: { 'Content-Type': 'multipart/form-data' }
     }
 
     axios(axiosOptions).then(res => {
-        if (!_.isEmpty(res.data.errors)) {
-            dispatch({
-                type: 'GET_ERROR',
-                payload: {
-                    errors: res.data.errors
-                }
-            })
-        } else {
+        if (_.isEmpty(res.data)) {
             dispatch({
                 type: 'CREATE_CARD',
                 payload: {}
             })
         }
+
+        dispatch({
+            type: 'GET_ERROR',
+            payload: {
+                errors: res.data
+            }
+        })
     })
 }

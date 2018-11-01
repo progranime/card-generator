@@ -1,5 +1,7 @@
 const express = require('express')
 const router = express.Router()
+const _ = require('lodash')
+const formidable = require('formidable')
 
 // load models
 const card = require('../../models/card')
@@ -30,13 +32,16 @@ router.get('/:id', async (req, res) => {
 // --- Please add passport authentication
 router.post('/', async (req, res) => {
     const request = req.body
-    const errors = cardForm.validation(request)
+    // const validation = cardForm.validation(request)
 
-    if (errors) return res.json(errors)
+    // if (!_.isEmpty(validation.errors)) return res.json(validation.errors)
 
-    // const result = await card.store(request)
-    // res.json(result)
-    return res.json(request)
+    let form = formidable.IncomingForm()
+
+    form.parse(req)
+
+    const result = await card.store(request)
+    return res.json(result)
 })
 
 // @router PUT api/card/:id/destroy

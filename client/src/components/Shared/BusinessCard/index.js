@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom'
 
 const Index = ({
     id,
-    picture,
+    pictureImageData,
     name,
     position,
     location,
@@ -42,8 +42,8 @@ const Index = ({
                 <div className="card__image-holder">
                     <img
                         src={
-                            picture
-                                ? picture
+                            pictureImageData
+                                ? pictureImageData
                                 : `${
                                       window.location.origin
                                   }/images/assets/default-avatar.jpg`
