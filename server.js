@@ -8,7 +8,7 @@ const productDivision = require('./routes/api/productDivision')
 const brand = require('./routes/api/brand')
 
 // express middleware
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 // create routes
