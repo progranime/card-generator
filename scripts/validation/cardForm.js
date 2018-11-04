@@ -3,13 +3,19 @@ const _ = require('lodash')
 module.exports = {
     validation: data => {
         console.log(data)
-        let errors, emailRegex, name, position, location, email
+        let errors, emailRegex, picture, name, position, location, email
         errors = {}
         emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        picture = data.picture || ''
         name = data.name || ''
         position = data.position || ''
         location = data.location || ''
         email = data.email || ''
+
+        // if (_.isEmpty(picture)) errors.picture = 'Picture field is required'
+        // use file filter of multer to validate the file
+        // picture must be image with extension of jpg, jpg, png
+        // and size of less than 10mb
 
         if (_.isEmpty(name)) errors.name = 'Name field is required'
         if (_.isEmpty(position)) errors.position = 'Position field is required'

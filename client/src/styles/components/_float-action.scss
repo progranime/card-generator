@@ -33,13 +33,17 @@
     }
 
     &__container {
-        padding: 10px 15px;
         background-color: #e74c3c;
         border-radius: 50%;
         box-shadow: 3px 3px 3px #cec8c8;
 
         &:hover {
             background-color: darken(#e74c3c, 10%);
+        }
+
+        a {
+            padding: 10px 15px;
+            display: inline-block;
         }
     }
 

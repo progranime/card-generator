@@ -15,12 +15,12 @@ class Index extends Component {
     constructor() {
         super()
         this.state = {
-            picture: null,
-            pictureHolder: null,
+            picture: '',
+            pictureHolder: '',
             name: '',
             position: '',
             location: '',
-            productDivision: '',
+            productDivision: 1,
             email: '',
             cellphone: '',
             telephone: '',
@@ -28,12 +28,12 @@ class Index extends Component {
         }
 
         this.baseState = {
-            picture: null,
-            pictureHolder: null,
+            picture: '',
+            pictureHolder: '',
             name: '',
             position: '',
             location: '',
-            productDivision: '',
+            productDivision: 1,
             email: '',
             cellphone: '',
             telephone: '',
@@ -123,7 +123,6 @@ class Index extends Component {
     componentWillReceiveProps(nextProps) {
         const { card, formType } = nextProps
         const cardData = card.results[0]
-
         // update the state if the form is for edit
         if (cardData && formType === 'edit') {
             this.setState({
@@ -131,6 +130,7 @@ class Index extends Component {
                 name: cardData.name,
                 position: cardData.position,
                 location: cardData.location,
+                productDivision: cardData.product_division_id,
                 email: cardData.email,
                 cellphone: cardData.cellphone,
                 telephone: cardData.telephone,

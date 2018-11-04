@@ -6782,12 +6782,14 @@ a.text-dark:hover, a.text-dark:focus {
   .float-action.loading .float-action__container {
     background-color: #ed7669; }
   .float-action__container {
-    padding: 10px 15px;
     background-color: #e74c3c;
     border-radius: 50%;
     box-shadow: 3px 3px 3px #cec8c8; }
     .float-action__container:hover {
       background-color: #d62c1a; }
+    .float-action__container a {
+      padding: 10px 15px;
+      display: inline-block; }
   .float-action .scroll,
   .float-action .plus {
     color: #fff;

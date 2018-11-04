@@ -11,6 +11,7 @@ const Form = ({
     name,
     position,
     location,
+    productDivision,
     email,
     cellphone,
     telephone,
@@ -32,6 +33,13 @@ const Form = ({
                     onChange={handleChangeImage}
                     defaultValue={picture}
                 />
+            </div>
+            <div
+                className={classnames('invalid-feedback', {
+                    'd-block': errors.picture
+                })}
+            >
+                <p>{errors.picture}</p>
             </div>
             <div className="form-group">
                 <label htmlFor="name">Name</label>
@@ -95,6 +103,7 @@ const Form = ({
             </div>
             <div className="form-group">
                 <label htmlFor="productDivision">Product Division</label>
+
                 <select
                     name="productDivision"
                     id="productDivision"
@@ -102,6 +111,7 @@ const Form = ({
                     onChange={handleChange.bind(this, {
                         method: 'getBrandList'
                     })}
+                    defaultValue={productDivision}
                 >
                     {productDivisions.map(productDivision => {
                         return (
