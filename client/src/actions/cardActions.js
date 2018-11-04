@@ -24,6 +24,7 @@ export const getCard = payload => dispatch => {
 
 // create card
 export const createCard = payload => dispatch => {
+    console.log(payload)
     const formData = new FormData()
 
     Object.entries(payload).map(data => {

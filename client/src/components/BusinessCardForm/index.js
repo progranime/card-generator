@@ -16,7 +16,7 @@ class Index extends Component {
         super()
         this.state = {
             picture: null,
-            pictureImageData: '',
+            pictureHolder: null,
             name: '',
             position: '',
             location: '',
@@ -29,7 +29,7 @@ class Index extends Component {
 
         this.baseState = {
             picture: null,
-            pictureImageData: '',
+            pictureHolder: null,
             name: '',
             position: '',
             location: '',
@@ -60,7 +60,7 @@ class Index extends Component {
     handleSubmit(e) {
         e.preventDefault()
         const formData = {
-            picture: this.state.picture,
+            picture: this.state.pictureHolder,
             name: this.state.name,
             position: this.state.position,
             location: this.state.location,
@@ -78,11 +78,13 @@ class Index extends Component {
     handleChangeImage(e) {
         if (e.target.files[0]) {
             this.setState({
-                picture: e.target.files[0]
+                pictureHolder: e.target.files[0]
             })
             let reader = new FileReader()
             reader.onload = e => {
-                this.setState({ pictureImageData: e.target.result })
+                this.setState({
+                    picture: e.target.result
+                })
             }
             reader.readAsDataURL(e.target.files[0])
         }
