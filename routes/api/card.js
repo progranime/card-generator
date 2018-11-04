@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const _ = require('lodash')
-const formidable = require('formidable')
+const fileUpload = require('../../scripts/fileUpload')
 
 // load models
 const card = require('../../models/card')
@@ -30,18 +30,21 @@ router.get('/:id', async (req, res) => {
 // @desc   Create new card
 // @access Public
 // --- Please add passport authentication
-router.post('/', async (req, res) => {
+router.post('/', (req, res) => {
     const request = req.body
     // const validation = cardForm.validation(request)
 
     // if (!_.isEmpty(validation.errors)) return res.json(validation.errors)
 
-    let form = formidable.IncomingForm()
+    fileUpload.single({ name: 'picture' })(req, res, async err => {
+        console.log('Request ---', req.body)
+        console.log('Request file ---', req.file) //Here you get file.
+        // set the filename
+        req.body.picture = `/images/dp/${req.file.filename}`
 
-    form.parse(req)
-
-    const result = await card.store(request)
-    return res.json(result)
+        const result = await card.store(req.body)
+        return res.json(result)
+    })
 })
 
 // @router PUT api/card/:id/destroy

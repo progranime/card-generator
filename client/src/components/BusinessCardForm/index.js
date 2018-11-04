@@ -15,7 +15,7 @@ class Index extends Component {
     constructor() {
         super()
         this.state = {
-            picture: '',
+            picture: null,
             pictureImageData: '',
             name: '',
             position: '',
@@ -28,7 +28,8 @@ class Index extends Component {
         }
 
         this.baseState = {
-            picture: '',
+            picture: null,
+            pictureImageData: '',
             name: '',
             position: '',
             location: '',
