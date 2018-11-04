@@ -2,6 +2,7 @@ const _ = require('lodash')
 
 module.exports = {
     validation: data => {
+        console.log(data)
         let errors, emailRegex, name, position, location, email
         errors = {}
         emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/

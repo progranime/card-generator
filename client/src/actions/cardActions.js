@@ -24,12 +24,9 @@ export const getCard = payload => dispatch => {
 
 // create card
 export const createCard = payload => dispatch => {
-    console.log(payload)
     const formData = new FormData()
 
-    Object.entries(payload).map(data => {
-        formData.append(data[0], data[1])
-    })
+    Object.entries(payload).map(data => formData.append(data[0], data[1]))
 
     const axiosOptions = {
         method: 'post',
@@ -39,9 +36,7 @@ export const createCard = payload => dispatch => {
     }
 
     axios(axiosOptions).then(res => {
-        console.log(res)
-
-        /* if (_.isEmpty(res.data)) {
+        if (_.isEmpty(res.data)) {
             dispatch({
                 type: 'CREATE_CARD',
                 payload: {}
@@ -53,6 +48,6 @@ export const createCard = payload => dispatch => {
             payload: {
                 errors: res.data
             }
-        }) */
+        })
     })
 }

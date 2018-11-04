@@ -30,22 +30,23 @@ router.get('/:id', async (req, res) => {
 // @desc   Create new card
 // @access Public
 // --- Please add passport authentication
-router.post('/', (req, res) => {
-    const request = req.body
-    // const validation = cardForm.validation(request)
+router.post(
+    '/',
+    fileUpload.single({ name: 'picture' }),
+    async (req, res, err) => {
+        if (err) console.log(err)
 
-    // if (!_.isEmpty(validation.errors)) return res.json(validation.errors)
+        const validation = cardForm.validation(req.body)
 
-    fileUpload.single({ name: 'picture' })(req, res, async err => {
-        console.log('Request ---', req.body)
-        console.log('Request file ---', req.file) //Here you get file.
+        if (!_.isEmpty(validation.errors)) return res.json(validation.errors)
+
         // set the filename
         req.body.picture = `/images/dp/${req.file.filename}`
 
         const result = await card.store(req.body)
         return res.json(result)
-    })
-})
+    }
+)
 
 // @router PUT api/card/:id/destroy
 // @desc   Delete the card using its id
