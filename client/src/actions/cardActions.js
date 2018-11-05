@@ -1,5 +1,4 @@
 import axios from 'axios'
-import _ from 'lodash'
 
 export const getCard = payload => dispatch => {
     let cardId = ''
@@ -36,23 +35,9 @@ export const createCard = (payload, history) => dispatch => {
 
     axios(axiosOptions).then(res => {
         console.log(res.data)
-        if (_.isEmpty(res.data.errors)) {
-            dispatch({
-                type: 'GET_ERROR',
-                payload: {
-                    errors: {}
-                }
-            })
-
+        if (res.data) {
             // if there is no error return to home page
             history.push('/')
-        } else {
-            dispatch({
-                type: 'GET_ERROR',
-                payload: {
-                    errors: res.data.errors
-                }
-            })
         }
     })
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import _ from 'lodash'
 
 import {
     getProductDivision,
@@ -10,10 +11,11 @@ import { getBrand } from '../../actions/brandActions'
 import { getCard, createCard, updateCard } from '../../actions/cardActions'
 import { BusinessCard, BusinessCardRear } from '../Shared'
 import Form from './Form'
+import cardForm from '../../scripts/validation/cardForm'
 
 class Index extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             picture: '',
             pictureFile: '',
@@ -24,10 +26,11 @@ class Index extends Component {
             email: '',
             cellphone: '',
             telephone: '',
-            skype: ''
+            skype: '',
+            errors: {}
         }
 
-        this.baseState = {
+        this.defaultState = {
             picture: '',
             pictureFile: '',
             name: '',
@@ -37,7 +40,8 @@ class Index extends Component {
             email: '',
             cellphone: '',
             telephone: '',
-            skype: ''
+            skype: '',
+            errors: {}
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -59,6 +63,7 @@ class Index extends Component {
 
     handleSubmit(e) {
         e.preventDefault()
+
         const formData = {
             picture: this.state.pictureFile || this.state.picture,
             name: this.state.name,
@@ -70,12 +75,19 @@ class Index extends Component {
             telephone: this.state.telephone,
             skype: this.state.skype
         }
+        let validation = cardForm.validation(formData)
 
-        if (this.props.formType === 'create') {
-            this.props.createCard(formData, this.props.history)
+        if (!_.isEmpty(validation.errors)) {
+            this.setState({
+                errors: validation.errors
+            })
         } else {
-            formData.id = this.props.match.params.id
-            this.props.updateCard(formData, this.props.history)
+            if (this.props.formType === 'create') {
+                this.props.createCard(formData, this.props.history)
+            } else {
+                formData.id = this.props.match.params.id
+                this.props.updateCard(formData, this.props.history)
+            }
         }
     }
 
@@ -95,7 +107,7 @@ class Index extends Component {
     }
 
     handleReset() {
-        this.setState(this.baseState)
+        this.setState(this.defaultState)
     }
 
     getBrandList() {
@@ -160,7 +172,6 @@ class Index extends Component {
                         {...this.state}
                         brandLists={brandLists.brand_list_name}
                         formType={this.props.formType}
-                        errors={this.props.error.card}
                     />
                 </div>
                 <div className="col-20 col-md-10 align-self-center">

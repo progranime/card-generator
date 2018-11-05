@@ -1,6 +1,5 @@
 import React from 'react'
-import classnames from 'classnames'
-import _ from 'lodash'
+import { FormInput } from '../Shared'
 
 const Form = ({
     handleChange,
@@ -23,84 +22,52 @@ const Form = ({
 }) => {
     return (
         <form className="form" onSubmit={handleSubmit}>
-            <div className="form-group">
-                <label htmlFor="name">Picture</label>
-                <input
-                    type="file"
-                    name="picture"
-                    id="picture"
-                    className="form-control"
-                    onChange={handleChangeImage}
-                    defaultValue={picture}
-                />
-            </div>
-            <div
-                className={classnames('invalid-feedback', {
-                    'd-block': errors.picture
+            <FormInput
+                label="Picture"
+                type="file"
+                name="picture"
+                id="picture"
+                handleChange={handleChangeImage}
+                defaultValue={picture}
+                error={errors.picture}
+            />
+
+            <FormInput
+                label="Name"
+                type="text"
+                name="name"
+                id="name"
+                handleChange={handleChange.bind(this, {
+                    method: ''
                 })}
-            >
-                <p>{errors.picture}</p>
-            </div>
-            <div className="form-group">
-                <label htmlFor="name">Name</label>
-                <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    className="form-control"
-                    onChange={handleChange.bind(this, {
-                        method: ''
-                    })}
-                    defaultValue={name}
-                />
-            </div>
-            <div
-                className={classnames('invalid-feedback', {
-                    'd-block': errors.name
+                defaultValue={name}
+                error={errors.name}
+            />
+
+            <FormInput
+                label="Position"
+                type="text"
+                name="position"
+                id="position"
+                handleChange={handleChange.bind(this, {
+                    method: ''
                 })}
-            >
-                <p>{errors.name}</p>
-            </div>
-            <div className="form-group">
-                <label htmlFor="name">Position</label>
-                <input
-                    type="text"
-                    name="position"
-                    id="position"
-                    className="form-control"
-                    onChange={handleChange.bind(this, {
-                        method: ''
-                    })}
-                    defaultValue={position}
-                />
-            </div>
-            <div
-                className={classnames('invalid-feedback', {
-                    'd-block': errors.position
+                defaultValue={position}
+                error={errors.position}
+            />
+
+            <FormInput
+                label="Location"
+                type="text"
+                name="location"
+                id="location"
+                handleChange={handleChange.bind(this, {
+                    method: ''
                 })}
-            >
-                <p>{errors.position}</p>
-            </div>
-            <div className="form-group">
-                <label htmlFor="location">Location</label>
-                <input
-                    type="text"
-                    name="location"
-                    id="location"
-                    className="form-control"
-                    onChange={handleChange.bind(this, {
-                        method: ''
-                    })}
-                    defaultValue={location}
-                />
-            </div>
-            <div
-                className={classnames('invalid-feedback', {
-                    'd-block': errors.location
-                })}
-            >
-                <p>{errors.location}</p>
-            </div>
+                defaultValue={location}
+                error={errors.location}
+            />
+
             <div className="form-group">
                 <label htmlFor="productDivision">Product Division</label>
 
@@ -125,65 +92,52 @@ const Form = ({
                     })}
                 </select>
             </div>
-            <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input
-                    type="text"
-                    name="email"
-                    id="email"
-                    className="form-control"
-                    onChange={handleChange.bind(this, {
-                        method: ''
-                    })}
-                    defaultValue={email}
-                />
-            </div>
-            <div
-                className={classnames('invalid-feedback', {
-                    'd-block': !_.isEmpty(errors.email)
+
+            <FormInput
+                label="Email"
+                type="text"
+                name="email"
+                id="email"
+                handleChange={handleChange.bind(this, {
+                    method: ''
                 })}
-            >
-                <p>{errors.email}</p>
-            </div>
-            <div className="form-group">
-                <label htmlFor="cellphone">Cellphone</label>
-                <input
-                    type="text"
-                    name="cellphone"
-                    id="cellphone"
-                    className="form-control"
-                    onChange={handleChange.bind(this, {
-                        method: ''
-                    })}
-                    defaultValue={cellphone}
-                />
-            </div>
-            <div className="form-group">
-                <label htmlFor="telephone">Telephone</label>
-                <input
-                    type="text"
-                    name="telephone"
-                    id="telephone"
-                    className="form-control"
-                    onChange={handleChange.bind(this, {
-                        method: ''
-                    })}
-                    defaultValue={telephone}
-                />
-            </div>
-            <div className="form-group">
-                <label htmlFor="skype">Skype</label>
-                <input
-                    type="text"
-                    name="skype"
-                    id="skype"
-                    className="form-control"
-                    onChange={handleChange.bind(this, {
-                        method: ''
-                    })}
-                    defaultValue={skype}
-                />
-            </div>
+                defaultValue={email}
+                error={errors.email}
+            />
+
+            <FormInput
+                label="Cellphone"
+                type="text"
+                name="cellphone"
+                id="cellphone"
+                handleChange={handleChange.bind(this, {
+                    method: ''
+                })}
+                defaultValue={cellphone}
+            />
+
+            <FormInput
+                label="Telephone"
+                type="text"
+                name="telephone"
+                id="telephone"
+                handleChange={handleChange.bind(this, {
+                    method: ''
+                })}
+                defaultValue={telephone}
+            />
+
+            <FormInput
+                label="Skype"
+                type="text"
+                name="skype"
+                id="skype"
+                handleChange={handleChange.bind(this, {
+                    method: ''
+                })}
+                defaultValue={skype}
+            />
+
             <div className="float-right">
                 <input
                     type="reset"

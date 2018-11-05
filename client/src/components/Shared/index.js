@@ -4,6 +4,7 @@ import PrivateRoute from './PrivateRoute'
 import FloatAction from './FloatAction'
 import BusinessCard from './BusinessCard'
 import BusinessCardRear from './BusinessCardRear'
+import FormInput from './FormInput'
 
 export {
     Navbar,
@@ -11,5 +12,6 @@ export {
     PrivateRoute,
     FloatAction,
     BusinessCard,
-    BusinessCardRear
+    BusinessCardRear,
+    FormInput
 }
