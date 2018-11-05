@@ -22,8 +22,7 @@ export const getCard = payload => dispatch => {
     })
 }
 
-// create card
-export const createCard = payload => dispatch => {
+export const createCard = (payload, history) => dispatch => {
     const formData = new FormData()
 
     Object.entries(payload).map(data => formData.append(data[0], data[1]))
@@ -36,18 +35,42 @@ export const createCard = payload => dispatch => {
     }
 
     axios(axiosOptions).then(res => {
-        if (_.isEmpty(res.data)) {
+        console.log(res.data)
+        if (_.isEmpty(res.data.errors)) {
             dispatch({
-                type: 'CREATE_CARD',
-                payload: {}
+                type: 'GET_ERROR',
+                payload: {
+                    errors: {}
+                }
+            })
+
+            // if there is no error return to home page
+            history.push('/')
+        } else {
+            dispatch({
+                type: 'GET_ERROR',
+                payload: {
+                    errors: res.data.errors
+                }
             })
         }
+    })
+}
 
-        dispatch({
-            type: 'GET_ERROR',
-            payload: {
-                errors: res.data
-            }
-        })
+export const updateCard = (payload, history) => dispatch => {
+    console.log('update the card', payload)
+    const formData = new FormData()
+
+    Object.entries(payload).map(data => formData.append(data[0], data[1]))
+
+    const axiosOptions = {
+        method: 'put',
+        url: `/api/card/${payload.id}`,
+        data: formData,
+        headers: { 'content-Type': 'multipart/form-data' }
+    }
+
+    axios(axiosOptions).then(res => {
+        console.log(res)
     })
 }

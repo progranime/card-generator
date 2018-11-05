@@ -7,7 +7,7 @@ import {
     getBrandList
 } from '../../actions/productDivisionActions'
 import { getBrand } from '../../actions/brandActions'
-import { getCard, createCard } from '../../actions/cardActions'
+import { getCard, createCard, updateCard } from '../../actions/cardActions'
 import { BusinessCard, BusinessCardRear } from '../Shared'
 import Form from './Form'
 
@@ -16,7 +16,7 @@ class Index extends Component {
         super()
         this.state = {
             picture: '',
-            pictureHolder: '',
+            pictureFile: '',
             name: '',
             position: '',
             location: '',
@@ -29,7 +29,7 @@ class Index extends Component {
 
         this.baseState = {
             picture: '',
-            pictureHolder: '',
+            pictureFile: '',
             name: '',
             position: '',
             location: '',
@@ -60,7 +60,7 @@ class Index extends Component {
     handleSubmit(e) {
         e.preventDefault()
         const formData = {
-            picture: this.state.pictureHolder,
+            picture: this.state.pictureFile || this.state.picture,
             name: this.state.name,
             position: this.state.position,
             location: this.state.location,
@@ -71,14 +71,18 @@ class Index extends Component {
             skype: this.state.skype
         }
 
-        // create card
-        this.props.createCard(formData)
+        if (this.props.formType === 'create') {
+            this.props.createCard(formData, this.props.history)
+        } else {
+            formData.id = this.props.match.params.id
+            this.props.updateCard(formData, this.props.history)
+        }
     }
 
     handleChangeImage(e) {
         if (e.target.files[0]) {
             this.setState({
-                pictureHolder: e.target.files[0]
+                pictureFile: e.target.files[0]
             })
             let reader = new FileReader()
             reader.onload = e => {
@@ -181,7 +185,8 @@ Index.propTypes = {
     getBrandList: PropTypes.func.isRequired,
     getBrand: PropTypes.func.isRequired,
     getCard: PropTypes.func.isRequired,
-    createCard: PropTypes.func.isRequired
+    createCard: PropTypes.func.isRequired,
+    updateCard: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -196,7 +201,8 @@ const mapStateToActions = {
     getBrandList,
     getBrand,
     getCard,
-    createCard
+    createCard,
+    updateCard
 }
 
 export default connect(

@@ -38,7 +38,7 @@ router.post(
 
         const validation = cardForm.validation(req.body)
 
-        if (!_.isEmpty(validation.errors)) return res.json(validation.errors)
+        if (!_.isEmpty(validation.errors)) return res.json(validation)
 
         // set the filename
         req.body.picture = `/images/dp/${req.file.filename}`
@@ -48,13 +48,28 @@ router.post(
     }
 )
 
+// @router PUT api/card/:id
+// @desc   Update the card
+// @access PUT
+router.put('/:id', fileUpload.single({ name: 'picture' }), async (req, res) => {
+    console.log('update router')
+
+    // MUST DELETE THE PREVIOUS IMAGE !!!
+
+    // set the filename
+    req.body.picture = `/images/dp/${req.file.filename}`
+
+    const result = await card.update(req.body)
+    return res.json(result)
+})
+
 // @router PUT api/card/:id/destroy
 // @desc   Delete the card using its id
 // @access PUT
 router.put('/:id/destroy', async (req, res) => {
     const id = req.params.id
     const result = await card.destroy(id)
-    res.json(result)
+    return res.json(result)
 })
 
 module.exports = router

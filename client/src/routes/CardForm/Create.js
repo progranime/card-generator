@@ -5,7 +5,10 @@ class Create extends Component {
     render() {
         return (
             <div className="main-container">
-                <BusinessCardForm formType="create" />
+                <BusinessCardForm
+                    formType="create"
+                    history={this.props.history}
+                />
             </div>
         )
     }

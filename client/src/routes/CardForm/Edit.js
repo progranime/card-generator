@@ -5,7 +5,11 @@ class Create extends Component {
     render() {
         return (
             <div className="main-container">
-                <BusinessCardForm formType="edit" match={this.props.match} />
+                <BusinessCardForm
+                    formType="edit"
+                    match={this.props.match}
+                    history={this.props.history}
+                />
             </div>
         )
     }

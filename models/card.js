@@ -55,9 +55,6 @@ module.exports = {
             skype: req.skype
         }
 
-        // console.log(cardData)
-        // console.log(contactData)
-
         // insert data
         let INSERT_CARD = `INSERT INTO card SET ? `
         let INSERT_CONTACT = `INSERT INTO contact SET ?`
@@ -78,7 +75,41 @@ module.exports = {
             })
         })
     },
-    update: function() {},
+    update: function(req) {
+        const cardData = {
+            name: req.name,
+            picture: req.picture,
+            position: req.position,
+            location: req.location,
+            product_division_id: req.productDivision,
+            update_by: 'jeremy.espinosa'
+        }
+
+        const contactData = {
+            cellphone: req.cellphone,
+            telephone: req.telephone,
+            email: req.email,
+            skype: req.skype
+        }
+
+        let UPDATE_CARD = `UPDATE card SET ? WHERE id = ?`
+        let UPDATE_CONTACT = `UPDATE contact SET ? WHERE card_id = ?`
+
+        return new Promise(resolve => {
+            db.query(UPDATE_CARD, [cardData, req.id], (err, result) => {
+                if (err) console.log(err)
+
+                db.query(
+                    UPDATE_CONTACT,
+                    [contactData, req.id],
+                    (err, result) => {
+                        if (err) console.log(err)
+                        resolve(result)
+                    }
+                )
+            })
+        })
+    },
     destroy: function(id) {
         let UPDATE = `UPDATE card SET is_delete = 1 WHERE id = ?`
 
