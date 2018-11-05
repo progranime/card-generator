@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-const Spinner = ({ loading, message, styling }) => {
+const Index = ({ loading, message, styling }) => {
     return (
         <Fragment>
             {loading && (
@@ -19,10 +19,10 @@ const Spinner = ({ loading, message, styling }) => {
     )
 }
 
-Spinner.defaultProps = {
+Index.defaultProps = {
     loading: false,
     message: 'Loading ...',
     styling: {}
 }
 
-export default Spinner
+export default Index

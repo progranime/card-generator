@@ -56,6 +56,10 @@ export const updateCard = (payload, history) => dispatch => {
     }
 
     axios(axiosOptions).then(res => {
-        console.log(res)
+        console.log(res.data)
+        if (res.data) {
+            // if there is no error return to home page
+            history.push('/')
+        }
     })
 }

@@ -1,5 +1,4 @@
 import React from 'react'
-import _ from 'lodash'
 
 import Controls from './Controls'
 import ImageHolder from './ImageHolder'
@@ -38,7 +37,7 @@ const Index = ({
                     skype={skype}
                 />
 
-                <Brands brandLists={brandLists} />
+                {brandLists && <Brands brandLists={brandLists} />}
             </div>
         </div>
     )

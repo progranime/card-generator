@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import store from '../../store'
+import store from '../../../store'
 import _ from 'lodash'
 
 // to access the state of the store

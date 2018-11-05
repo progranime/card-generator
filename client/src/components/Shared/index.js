@@ -5,6 +5,7 @@ import FloatAction from './FloatAction'
 import BusinessCard from './BusinessCard'
 import BusinessCardRear from './BusinessCardRear'
 import FormInput from './FormInput'
+import Message from './Message'
 
 export {
     Navbar,
@@ -13,5 +14,6 @@ export {
     FloatAction,
     BusinessCard,
     BusinessCardRear,
-    FormInput
+    FormInput,
+    Message
 }

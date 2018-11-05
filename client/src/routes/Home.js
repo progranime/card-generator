@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import _ from 'lodash'
 
 import { BusinessCard, FloatAction } from '../components/Shared'
 import { getCard } from '../actions/cardActions'
+import { Message } from '../components/Shared'
 
 class Home extends Component {
     componentDidMount() {
@@ -33,8 +35,9 @@ class Home extends Component {
         })
         return (
             <div className="main-container">
+                {_.isEmpty(results) && <Message message="No Results ..." />}
                 <div className="card__wrapper">{cards}</div>
-                <FloatAction />
+                <FloatAction path="/card/create" />
             </div>
         )
     }

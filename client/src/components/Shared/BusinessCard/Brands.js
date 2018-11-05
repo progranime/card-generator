@@ -5,30 +5,29 @@ const Brands = ({ brandLists }) => {
     return (
         <div className="card__brands">
             <ul className="list list--style-none list--inline">
-                {brandLists &&
-                    brandLists.split(',').map((brandList, index) => {
-                        return (
-                            <li key={index}>
-                                <img
-                                    src={`${
-                                        window.location.origin
-                                    }/images/logos/${brandList}.png`}
-                                    alt=""
-                                />
-                            </li>
-                        )
-                    })}
+                {brandLists.split(',').map((brandList, index) => {
+                    return (
+                        <li key={index}>
+                            <img
+                                src={`${
+                                    window.location.origin
+                                }/images/logos/${brandList}.png`}
+                                alt=""
+                            />
+                        </li>
+                    )
+                })}
             </ul>
         </div>
     )
 }
 
 Brands.defaultProps = {
-    brandLists: []
+    brandLists: ''
 }
 
 Brands.propTypes = {
-    brandLists: PropTypes.array
+    brandLists: PropTypes.string
 }
 
 export default Brands
