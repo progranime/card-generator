@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import classnames from 'classnames'
+import PropTypes from 'prop-types'
 
 const Index = ({
     label,
@@ -40,4 +41,13 @@ Index.defaultProps = {
     name: '',
     id: ''
 }
+
+Index.propTypes = {
+    type: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    error: PropTypes.string
+}
+
 export default Index

@@ -14,6 +14,7 @@ import Login from './routes/Login'
 const Home = lazy(() => import('./routes/Home'))
 const CardFormCreate = lazy(() => import('./routes/CardForm/Create'))
 const CardFormEdit = lazy(() => import('./routes/CardForm/Edit'))
+const CardFormView = lazy(() => import('./routes/CardForm/View'))
 
 class App extends Component {
     render() {
@@ -44,6 +45,11 @@ class App extends Component {
                                 exact
                                 path="/card/:id/edit"
                                 component={CardFormEdit}
+                            />
+                            <PrivateRoute
+                                exact
+                                path="/card/:id/view"
+                                component={CardFormView}
                             />
                         </Suspense>
                     </div>
