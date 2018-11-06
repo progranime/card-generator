@@ -75,7 +75,6 @@ class Index extends Component {
             telephone: this.state.telephone,
             skype: this.state.skype
         }
-        console.log(this.state.productDivision)
 
         let validation = cardForm.validation(formData)
 

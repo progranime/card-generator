@@ -3,7 +3,9 @@ import _ from 'lodash'
 export default {
     validation: data => {
         let errors = {},
-            emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+            emailRegex = new RegExp(
+                /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+            ),
             picture = data.picture || '',
             name = data.name || '',
             position = data.position || '',
