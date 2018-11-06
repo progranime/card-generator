@@ -27,7 +27,8 @@ class Index extends Component {
             cellphone: '',
             telephone: '',
             skype: '',
-            errors: {}
+            errors: {},
+            hasUpdated: false
         }
 
         this.defaultState = {
@@ -41,7 +42,8 @@ class Index extends Component {
             cellphone: '',
             telephone: '',
             skype: '',
-            errors: {}
+            errors: {},
+            hasUpdated: false
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -140,8 +142,10 @@ class Index extends Component {
     componentWillReceiveProps(nextProps) {
         const { card, formType } = nextProps
         const cardData = card.results[0]
+
         // update the state if the form is for edit
-        if (cardData && formType === 'edit') {
+        // update the state once when filling the update form
+        if (cardData && formType === 'edit' && !this.state.hasUpdated) {
             this.setState({
                 picture: cardData.picture,
                 name: cardData.name,
@@ -152,6 +156,11 @@ class Index extends Component {
                 cellphone: cardData.cellphone,
                 telephone: cardData.telephone,
                 skype: cardData.skype
+            })
+
+            // this is to update the state once
+            this.setState({
+                hasUpdated: true
             })
         }
     }
@@ -170,7 +179,16 @@ class Index extends Component {
                         getBrandList={this.getBrandList}
                         handleChangeImage={this.handleChangeImage}
                         handleReset={this.handleReset}
-                        {...this.state}
+                        picture={this.state.picture}
+                        name={this.state.name}
+                        position={this.state.position}
+                        location={this.state.location}
+                        productDivision={this.state.productDivision}
+                        email={this.state.email}
+                        cellphone={this.state.email}
+                        telephone={this.state.telephone}
+                        skype={this.state.skype}
+                        errors={this.state.errors}
                         brandLists={brandLists.brand_list_name}
                         formType={this.props.formType}
                     />
