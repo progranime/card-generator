@@ -1,0 +1,47 @@
+.flash-message {
+    position: fixed;
+    top: 100px;
+    right: 10px;
+    color: #000;
+    z-index: 1;
+    background-color: #fff;
+    box-shadow: 2px 1px 5px #ccc;
+    width: 300px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding: 10px;
+    transform: translateX(200%);
+    transition: all 0.8s ease-in-out;
+
+    &.active {
+        transform: translateX(0%);
+    }
+
+    &--success {
+        border-left: 5px solid #2ecc71;
+    }
+
+    &--error {
+        border-left: 5px solid #e74c3c;
+    }
+
+    &--info {
+        border-left: 5px solid #3498db;
+    }
+
+    &--warning {
+        border-left: 5px solid #f1c40f;
+    }
+
+    &__heading {
+        font-weight: 500;
+        margin: 0;
+    }
+    &__message {
+        margin: 0;
+    }
+
+    .icon {
+        cursor: pointer;
+    }
+}

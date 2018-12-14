@@ -48,10 +48,18 @@
 // vendor scss
 
 // app components (order it alphabetical)
+@import './components/badge';
 @import './components/button';
 @import './components/card';
 @import './components/container';
 @import './components/float-action';
 @import './components/form';
+@import './components/icon';
 @import './components/list';
+@import './components/message';
 @import './components/navbar';
+@import './components/notification';
+@import './components/flash-message';
+@import './components/print';
+@import './components/spinner';
+@import './components/table';

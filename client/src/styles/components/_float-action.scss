@@ -1,10 +1,18 @@
 .float-action {
-    position: fixed;
-    right: 2%;
-    bottom: 85px;
-    z-index: 5;
-    transition: all 0.3s ease-in-out;
-    transform: translateX(200%);
+    margin-top: 15px;
+
+    &__wrapper {
+        position: fixed;
+        right: 2%;
+        bottom: 5%;
+        z-index: 5;
+        transition: all 0.3s ease-in-out;
+
+        &--left {
+            right: auto;
+            left: 2%;
+        }
+    }
 
     &--scroll-top {
         transform: translateX(200%);
@@ -33,7 +41,6 @@
     }
 
     &__container {
-        padding: 10px 15px;
         background-color: #e74c3c;
         border-radius: 50%;
         box-shadow: 3px 3px 3px #cec8c8;
@@ -41,10 +48,26 @@
         &:hover {
             background-color: darken(#e74c3c, 10%);
         }
+
+        a {
+            padding: 10px 15px;
+            display: inline-block;
+        }
+    }
+
+    &--secondary {
+        .float-action__container {
+            background-color: #ecf0f1;
+
+            svg {
+                color: #000;
+            }
+        }
     }
 
     .scroll,
-    .plus {
+    .plus,
+    svg {
         color: #fff;
         cursor: pointer;
     }

@@ -1,4 +1,4 @@
-import { GET_PRODUCT_DIVISION, GET_BRAND_LIST } from '../actions/types'
+import { GET_ALL_PRODUCT_DIVISION, GET_BRAND_LIST } from '../actions/types'
 
 const initialState = {
     productDivisions: [],
@@ -7,7 +7,7 @@ const initialState = {
 
 export default function(state = initialState, { type, payload }) {
     switch (type) {
-        case GET_PRODUCT_DIVISION:
+        case GET_ALL_PRODUCT_DIVISION:
             return {
                 ...state,
                 productDivisions: payload.productDivisions

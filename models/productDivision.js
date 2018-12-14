@@ -4,9 +4,11 @@ module.exports = {
     get: function(id = null) {
         let GET
         if (id) {
-            GET = `SELECT * FROM product_division WHERE id = ${id}`
+            GET = `SELECT * FROM product_division WHERE id = ${id}
+                AND is_delete = 0`
         } else {
-            GET = `SELECT * FROM product_division`
+            GET = `SELECT * FROM product_division
+                WHERE is_delete = 0`
         }
 
         return new Promise(resolve => {

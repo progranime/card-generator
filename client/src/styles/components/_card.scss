@@ -2,10 +2,16 @@
     background-color: #fff;
     width: 336px;
     height: 192px;
-    font-size: 10px;
+    font-size: 9px;
     position: relative;
     box-shadow: 1px 1px 3px #ccc;
+    line-height: 12px;
+    letter-spacing: 0pt;
+    border-radius: $spacing;
 
+    &--overflow {
+        overflow: hidden;
+    }
     &__wrapper {
         display: flex;
         flex-flow: row;
@@ -13,18 +19,29 @@
 
         .card {
             width: calc(100%);
-            margin: 2px;
+            margin: 5px;
 
             @include media-breakpoint-up(sm) {
-                width: calc(100% / 2 - 8px);
+                width: calc(100% / 2 - 10px);
             }
 
             @include media-breakpoint-up(md) {
-                width: calc(100% / 3 - 6px);
+                width: calc(100% / 3 - 10px);
             }
 
-            @include media-breakpoint-up(lg) {
-                width: calc(100% / 4 - 8px);
+            @include media-breakpoint-up(xl) {
+                width: calc(100% / 4 - 10px);
+            }
+        }
+
+        &--outline {
+            margin: 80px auto;
+            display: inline-block;
+
+            .card {
+                width: 336px;
+                height: 192px;
+                margin: 0 auto;
             }
         }
     }
@@ -34,6 +51,25 @@
         flex-wrap: wrap;
     }
 
+    &__label {
+        position: absolute;
+        top: -20px;
+        min-width: 30%;
+        background-color: #fff;
+        padding: 3px;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 1px solid #ccc;
+        border-bottom: none;
+        text-align: center;
+
+        p {
+            margin: 0;
+            font-weight: 500;
+            font-size: 12px;
+        }
+    }
+
     &__controls {
         position: absolute;
         top: 0;
@@ -41,22 +77,26 @@
 
         .control {
             cursor: pointer;
-            margin: 2px 4px;
+            margin: 3px 5px;
             color: #000;
+            font-size: 12px;
         }
     }
 
     &__image-holder {
         width: 150px;
-        height: 150px;
+        height: 160px;
         overflow: hidden;
         padding: 0px 50px 0px 20px;
+        display: inline-block;
 
         .default-pic {
             width: 80px;
             height: 100px;
             border-bottom-left-radius: 12%;
             border-bottom-right-radius: 12%;
+            background-size: 100% 100%;
+            background-position: center;
         }
 
         .title,
@@ -72,7 +112,13 @@
             font-size: 8px;
         }
     }
+
     &__details {
+        width: 155px;
+        height: 160px;
+        display: inline-block;
+        overflow: hidden;
+
         .logo {
             margin: 30px 0px 20px;
         }
@@ -80,14 +126,22 @@
         .list {
             li {
                 margin-bottom: 5px;
+                display: table;
             }
 
             .icon {
                 margin-right: 10px;
                 font-size: 8px;
+                display: table-cell;
+            }
+
+            .detail {
+                display: table-cell;
+                word-break: break-word;
             }
         }
     }
+
     &__brands {
         position: absolute;
         bottom: 20px;
@@ -105,6 +159,107 @@
         }
     }
 
+    &__outline {
+        &-item {
+            width: 40px;
+            height: 20px;
+            border-top: 1px solid;
+            border-bottom: 1px solid;
+            position: absolute;
+        }
+
+        .top-left {
+            &-x {
+                top: -20px;
+                left: -70px;
+                transform: skew(50deg);
+            }
+            &-y {
+                top: -50px;
+                left: -40px;
+                transform: rotate(90deg) skew(-40deg);
+            }
+        }
+
+        .top-right {
+            &-x {
+                top: -20px;
+                right: -70px;
+                transform: skew(-50deg);
+            }
+            &-y {
+                top: -50px;
+                right: -40px;
+                transform: rotate(90deg) skew(40deg);
+            }
+        }
+
+        .btm-left {
+            &-x {
+                left: -70px;
+                bottom: -20px;
+                transform: skew(-50deg);
+            }
+            &-y {
+                left: -40px;
+                bottom: -50px;
+                transform: rotate(90deg) skew(50deg);
+            }
+        }
+
+        .btm-right {
+            &-x {
+                right: -70px;
+                bottom: -20px;
+                transform: skew(50deg);
+            }
+            &-y {
+                right: -40px;
+                bottom: -50px;
+                transform: rotate(90deg) skew(-50deg);
+            }
+        }
+    }
+
+    &__footer {
+        margin-top: 30px;
+        width: 100%;
+        text-align: center;
+
+        .link {
+            color: #000;
+            text-decoration: none;
+        }
+    }
+
+    &__ribbon {
+        position: absolute;
+        width: 95px;
+        right: -20px;
+        bottom: 12px;
+        background-color: red;
+        transform: rotate(-40deg);
+        color: #fff;
+        padding: 5px;
+        text-align: center;
+        box-shadow: 3px 3px 5px #ccc;
+
+        p {
+            margin: 0;
+            text-transform: capitalize;
+        }
+
+        &--danger {
+            background-color: #e74c3c;
+        }
+        &--warning {
+            background-color: #f1c40f;
+        }
+        &--success {
+            background-color: #2ecc71;
+        }
+    }
+
     &--rear {
         .card__container {
             margin: 30px 25px;
@@ -112,7 +267,9 @@
 
         .card__details {
             width: 100%;
-            margin-bottom: 45px;
+            margin-bottom: 35px;
+            height: auto;
+
             .title {
                 color: red;
                 margin: 0;

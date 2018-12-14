@@ -4,6 +4,7 @@
     width: 100%;
     background-color: #fff;
     z-index: 5;
+    display: block !important; // there is a bug on ie that adds inline style of display:none
 
     &__container {
         @extend .container;
@@ -120,10 +121,8 @@
             }
 
             &:last-child {
-                border-left: $border;
-
                 img {
-                    margin-left: $spacing;
+                    margin-left: ($spacing / 3);
                 }
             }
 
@@ -139,6 +138,64 @@
                         display: inline;
                     }
                 }
+            }
+        }
+
+        .caret {
+            margin-left: ($spacing / 3);
+            top: 2px;
+            display: none;
+
+            @include media-breakpoint-up(sm) {
+                display: inline-block;
+            }
+        }
+    }
+
+    &__dropdown {
+        position: absolute;
+        top: 53px;
+        left: 0;
+        padding: 0;
+        width: 100%;
+        background-color: #efefef;
+        border-top: 1px solid #ddd;
+        display: block;
+
+        @include media-breakpoint-up(sm) {
+            display: none;
+        }
+
+        &.active {
+            display: block;
+        }
+
+        @include media-breakpoint-up(sm) {
+            top: 35px;
+            border: $border;
+            border-radius: 0px 0px 5px 5px;
+            background-color: #fff;
+        }
+
+        &-control {
+            cursor: pointer;
+        }
+
+        li {
+            display: block;
+            padding: 15px 30px;
+
+            @include media-breakpoint-up(sm) {
+                padding: 5px 15px;
+            }
+            & > a {
+                display: block;
+            }
+        }
+
+        .logout {
+            @include media-breakpoint-up(sm) {
+                border-top: $border;
             }
         }
     }

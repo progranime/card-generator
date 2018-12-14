@@ -2,3 +2,24 @@
     @extend .container;
     padding: 100px 0px;
 }
+
+.absolute-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.not-found-container {
+    text-align: center;
+    @extend .absolute-center;
+
+    .heading {
+        font-size: 200px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .subheading {
+        margin: 15px 0px;
+    }
+}

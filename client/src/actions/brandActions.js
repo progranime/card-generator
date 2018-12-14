@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-export const getBrand = payload => dispatch => {
+import { GET_ALL_BRAND } from './types'
+
+export const getAllBrand = payload => dispatch => {
     const axiosOptions = {
         method: 'get',
         url: '/api/brand'
@@ -8,7 +10,7 @@ export const getBrand = payload => dispatch => {
 
     axios(axiosOptions).then(res => {
         dispatch({
-            type: 'GET_BRAND',
+            type: GET_ALL_BRAND,
             payload: {
                 brands: res.data
             }

@@ -1,0 +1,14 @@
+.badge {
+    color: #fff;
+    padding: ($spacing / 3);
+
+    &--danger {
+        background-color: #e74c3c;
+    }
+    &--warning {
+        background-color: #f1c40f;
+    }
+    &--success {
+        background-color: #2ecc71;
+    }
+}

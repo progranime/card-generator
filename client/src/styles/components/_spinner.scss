@@ -1,0 +1,10 @@
+.spinner {
+    text-align: center;
+    &__item {
+        width: 50px;
+
+        &--sm {
+            width: 15px;
+        }
+    }
+}
