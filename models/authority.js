@@ -24,6 +24,17 @@ const self = {
             })
         })
     },
+    getByAuthorityRole: id => {
+        let GET = `SELECT * FROM authority
+            WHERE authority_role_id = ? AND is_delete = 0`
+
+        return new Promise(resolve => {
+            db.query(GET, [id], (err, results) => {
+                if (err) console.log(err)
+                resolve(results)
+            })
+        })
+    },
     store: async req => {
         let INSERT = `INSERT INTO authority SET ?`
         let formData = {

@@ -3,6 +3,14 @@ const router = express.Router()
 
 const authority = require('../../models/authority')
 
+// @router GET api/authority/authorityRole/:id
+// @desc   Get specific authority by its authority role like admin, printer
+// @access Public
+router.get('/authorityRole/:id', async (req, res) => {
+    const results = await authority.getByAuthorityRole(req.params.id)
+    return res.json(results)
+})
+
 // @router GET api/authority/getByEmail/:name
 // @desc   Get specific authority by name
 // @access Public

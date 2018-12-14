@@ -1,19 +1,21 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 
 import { getAllUserNotification } from '../../actions/notificationActions'
 import { updateNotificationIsRead } from '../../actions/notificationActions'
 import Notification from '../../components/Notification'
 import NotificationWrapper from '../../components/Notification/Wrapper'
+import Message from '../../components/Message'
 
 class Index extends Component {
     componentDidMount() {
-        getAllUserNotification()
+        this.props.getAllUserNotification()
     }
 
     handleReadNotification = id => {
-        updateNotificationIsRead({ id, isRead: 1 })
+        this.props.updateNotificationIsRead({ id, isRead: 1 })
     }
 
     renderNotification() {
@@ -39,21 +41,19 @@ class Index extends Component {
             )
         })
 
-        return <NotificationWrapper>{notifications}</NotificationWrapper>
+        return !_.isEmpty(notification.results) ? (
+            <Fragment>
+                <h4>Notifications</h4>
+                <hr />
+                <NotificationWrapper>{notifications}</NotificationWrapper>
+            </Fragment>
+        ) : (
+            <Message message="No Notifications Yet!" />
+        )
     }
 
     render() {
-        return (
-            <div className="main-container">
-                <div className="row">
-                    <div className="col-20 ">
-                        <h4>Notifications</h4>
-                        <hr />
-                        {this.renderNotification()}
-                    </div>
-                </div>
-            </div>
-        )
+        return <div className="main-container">{this.renderNotification()}</div>
     }
 }
 

@@ -13,6 +13,8 @@ const Index = ({
     fullTime,
     handleReadNotification
 }) => {
+    let templateStr = template
+    templateStr = template.replace('$sender_email', senderEmail)
     return (
         <li
             className={classnames('notification__item', {
@@ -35,7 +37,7 @@ const Index = ({
             </div>
 
             <div className="notification__details">
-                <p>{template.replace('$sender_email', senderEmail)}</p>
+                <p>{templateStr}</p>
                 <p>{`${fullTime} ${fullDate}`}</p>
             </div>
         </li>

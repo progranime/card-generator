@@ -7,7 +7,7 @@ import {
     UPDATE_NOTIFICATION_IS_READ
 } from './types'
 
-export const getAllUserNotification = () => {
+export const getAllUserNotification = () => dispatch => {
     const { auth } = store.getState()
 
     const axiosOptions = {
@@ -16,7 +16,7 @@ export const getAllUserNotification = () => {
     }
 
     axios(axiosOptions).then(res => {
-        store.dispatch({
+        dispatch({
             type: GET_ALL_USER_NOTIFICATION,
             payload: {
                 results: res.data
@@ -32,15 +32,18 @@ export const createNotification = payload => {
         data: payload
     }
 
-    axios(axiosOptions).then(res => {
-        store.dispatch({
-            type: CREATE_NOTIFICATION,
-            payload: {}
+    // only create notification if receiver and sender of the notification is not the same
+    if (payload.senderEmail !== payload.recipientEmail) {
+        axios(axiosOptions).then(res => {
+            store.dispatch({
+                type: CREATE_NOTIFICATION,
+                payload: {}
+            })
         })
-    })
+    }
 }
 
-export const updateNotificationIsRead = payload => {
+export const updateNotificationIsRead = payload => dispatch => {
     const axiosOptions = {
         method: 'put',
         url: `/api/notification/`,
@@ -59,7 +62,7 @@ export const updateNotificationIsRead = payload => {
     })
 
     axios(axiosOptions).then(res => {
-        store.dispatch({
+        dispatch({
             type: UPDATE_NOTIFICATION_IS_READ,
             payload: {
                 results: newNotification

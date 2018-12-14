@@ -19,6 +19,7 @@ import {
     deleteCard
 } from '../../../actions/cardActions'
 import { getAllBrand } from '../../../actions/brandActions'
+import { getAllAuthorityByRoleId } from '../../../actions/authorityActions'
 import Spinner from '../../../components/Spinner'
 import BusinessCardFront from '../../../components/BusinessCard/Front'
 import BusinessCardRear from '../../../components/BusinessCard/Rear'
@@ -28,6 +29,7 @@ import BusinessCardFrontWrapper from '../../../components/BusinessCard/Front/Wra
 import BusinessCardRearWrapper from '../../../components/BusinessCard/Rear/Wrapper'
 import FlashMessage from '../../../components/FlashMessage'
 import ModalConfirmation from '../../../components/Modal/Confirmation'
+import ModalApproval from '../../../components/Modal/Approval'
 import pdfCreator from '../../../scripts/pdfCreator'
 
 class Index extends Component {
@@ -38,7 +40,9 @@ class Index extends Component {
             requestApprovalLoading: false,
             show: false,
             showConfirmationModal: false,
-            hasEmailSent: false
+            hasEmailSent: false,
+            showApprovalModal: false,
+            approver: ''
         }
     }
 
@@ -51,24 +55,14 @@ class Index extends Component {
         })
     }
 
-    requestApproval = () => {
-        const { card, match } = this.props
-
-        // send email to get an approval
-        this.props.requestApproval({
-            id: match.params.id,
-            createBy: card.result.create_by
-        })
-
-        this.setState(prevState => {
-            return {
-                requestApprovalLoading: !prevState.requestApprovalLoading
-            }
-        })
-    }
-
     handleState = state => {
         this.setState(state)
+    }
+
+    handleChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
 
     deleteCard = () => {
@@ -83,11 +77,35 @@ class Index extends Component {
                     showConfirmationModal: !prevState.showConfirmationModal
                 }
             })
+        } else if (data.type === 'approval') {
+            this.setState(prevState => {
+                return {
+                    showApprovalModal: !prevState.showApprovalModal
+                }
+            })
         }
 
         if (data.confirm) {
             this.deleteCard()
         }
+    }
+
+    handleSubmit = e => {
+        e.preventDefault()
+        const { match } = this.props
+
+        // send email to get an approval
+        this.props.requestApproval({
+            id: match.params.id,
+            recipientEmail: this.state.approver
+        })
+
+        this.setState(prevState => {
+            return {
+                requestApprovalLoading: !prevState.requestApprovalLoading,
+                showApprovalModal: !prevState.showApprovalModal
+            }
+        })
     }
 
     componentDidMount() {
@@ -98,11 +116,13 @@ class Index extends Component {
         this.props.getSingleCard({
             id: match.params.id
         })
+        // get all authority with id of 1 = admin
+        this.props.getAllAuthorityByRoleId({ id: 1 })
     }
 
     componentWillReceiveProps(nextProps) {
         const { hasLoad, hasEmailSent } = this.state
-        const { card } = nextProps
+        const { card, authority } = nextProps
         const cardData = card.result
 
         if (Object.keys(cardData).length !== 0 && !hasLoad) {
@@ -110,7 +130,15 @@ class Index extends Component {
                 id: cardData.product_division_id
             })
 
-            this.setState({ hasLoad: !hasLoad })
+            this.setState({
+                hasLoad: !hasLoad
+            })
+        }
+
+        if (Object.keys(authority.admin).length !== 0) {
+            this.setState({
+                approver: authority.admin[0].email
+            })
         }
 
         if (card.hasEmailSent && !hasEmailSent) {
@@ -123,7 +151,7 @@ class Index extends Component {
     }
 
     render() {
-        const { card, brand, productDivision, match } = this.props
+        const { card, brand, productDivision, authority, match } = this.props
         const cardData = card.result
 
         return (
@@ -160,7 +188,11 @@ class Index extends Component {
                 </div>
 
                 <FloatActionWrapper>
-                    <FloatAction handleClick={this.requestApproval}>
+                    <FloatAction
+                        handleClick={this.handleToggleModal.bind(this, {
+                            type: 'approval'
+                        })}
+                    >
                         {!this.state.requestApprovalLoading ? (
                             <FaEnvelope />
                         ) : (
@@ -201,6 +233,15 @@ class Index extends Component {
                     handleToggleModal={this.handleToggleModal}
                 />
 
+                <ModalApproval
+                    isOpen={this.state.showApprovalModal}
+                    approver={this.state.approver}
+                    admins={authority.admin}
+                    handleToggleModal={this.handleToggleModal}
+                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit}
+                />
+
                 {card && (
                     <FlashMessage
                         message={card.message}
@@ -221,13 +262,15 @@ Index.propTypes = {
     deleteCard: PropTypes.func.isRequired,
     getAllProductDivision: PropTypes.func.isRequired,
     getBrandList: PropTypes.func.isRequired,
-    getAllBrand: PropTypes.func.isRequired
+    getAllBrand: PropTypes.func.isRequired,
+    getAllAuthorityByRoleId: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     productDivision: state.productDivision,
     brand: state.brand,
-    card: state.card
+    card: state.card,
+    authority: state.authority
 })
 
 const mapDispatchToProps = {
@@ -236,7 +279,8 @@ const mapDispatchToProps = {
     deleteCard,
     getAllProductDivision,
     getBrandList,
-    getAllBrand
+    getAllBrand,
+    getAllAuthorityByRoleId
 }
 
 export default connect(

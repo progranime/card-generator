@@ -26,6 +26,7 @@ const self = {
             LEFT JOIN notification_type nt
             ON n.notification_type_id = nt.id
             WHERE n.recipient_email = '${email}'
+            AND n.sender_email <> '${email}'
             ORDER BY n.create_date DESC`
 
         return new Promise(resolve => {

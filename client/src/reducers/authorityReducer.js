@@ -1,16 +1,18 @@
 import {
     GET_ALL_AUTHORITY,
-    DELETE_AUTHORITY,
     GET_SINGLE_AUTHORITY,
+    GET_ALL_AUTHORITY_BY_ROLE_ID,
+    CREATE_AUTHORITY,
+    DELETE_AUTHORITY,
     UPDATE_AUTHORITY,
-    UPDATE_AUTHORITY_MESSAGE,
-    CREATE_AUTHORITY
+    UPDATE_AUTHORITY_MESSAGE
 } from '../actions/types'
 
 const initialState = {
     results: [],
     result: {},
-    message: ''
+    message: '',
+    admin: []
 }
 
 export default function(state = initialState, { type, payload }) {
@@ -24,6 +26,11 @@ export default function(state = initialState, { type, payload }) {
             return {
                 ...state,
                 result: payload.result
+            }
+        case GET_ALL_AUTHORITY_BY_ROLE_ID:
+            return {
+                ...state,
+                admin: payload.admin
             }
         case CREATE_AUTHORITY:
             return {

@@ -142,7 +142,7 @@ export const updateCardStatus = (payload, history) => dispatch => {
             }
         })
 
-        // add notification to the system
+        // add notification for updating the business card status
         createNotification({
             senderEmail: auth.user.id,
             recipientEmail: payload.createBy,
@@ -178,6 +178,8 @@ export const deleteCard = (payload, history, redirect = '/') => dispatch => {
 }
 
 export const requestApproval = payload => dispatch => {
+    const { auth } = store.getState()
+
     const axiosOptions = {
         method: 'post',
         url: '/api/card/requestApproval',
@@ -191,6 +193,14 @@ export const requestApproval = payload => dispatch => {
                 hasEmailSent: true,
                 message: 'Email has been sent!'
             }
+        })
+
+        // add notification for asking for approval
+        createNotification({
+            senderEmail: auth.user.id,
+            recipientEmail: payload.recipientEmail,
+            link: `admin/dashboard/${payload.id}/edit`,
+            notificationTypeId: 3
         })
     })
 }

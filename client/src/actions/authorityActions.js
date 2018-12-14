@@ -4,6 +4,7 @@ import {
     GET_ERROR,
     GET_ALL_AUTHORITY,
     GET_SINGLE_AUTHORITY,
+    GET_ALL_AUTHORITY_BY_ROLE_ID,
     CREATE_AUTHORITY,
     UPDATE_AUTHORITY,
     UPDATE_AUTHORITY_MESSAGE,
@@ -37,6 +38,22 @@ export const getSingleAuthority = payload => dispatch => {
             type: GET_SINGLE_AUTHORITY,
             payload: {
                 result: res.data
+            }
+        })
+    })
+}
+
+export const getAllAuthorityByRoleId = payload => dispatch => {
+    const axiosOptions = {
+        method: 'get',
+        url: `/api/authority/authorityRole/${payload.id}`
+    }
+
+    axios(axiosOptions).then(res => {
+        dispatch({
+            type: GET_ALL_AUTHORITY_BY_ROLE_ID,
+            payload: {
+                admin: res.data
             }
         })
     })
